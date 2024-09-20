@@ -1,9 +1,11 @@
-package edu.escuelaing.SyncHealthBack;
+package edu.escuelaing.synchealthback;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @SpringBootApplication
+@EnableMongoRepositories
 public class SyncHealthBackApplication {
 
 	public static void main(String[] args) {

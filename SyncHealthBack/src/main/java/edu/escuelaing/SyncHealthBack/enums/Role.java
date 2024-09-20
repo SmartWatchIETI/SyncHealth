@@ -1,4 +1,4 @@
-package edu.escuelaing.synchealthback.enums;
+package edu.escuelaing.SyncHealthBack.enums;
 /**
  * Enum that represents the roles of the users
  * @author  Andres Arias

@@ -1,6 +1,6 @@
-package edu.escuelaing.synchealthback.repositorys;
+package edu.escuelaing.SyncHealthBack.repositorys;
 
-import edu.escuelaing.synchealthback.models.User;
+import edu.escuelaing.SyncHealthBack.models.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

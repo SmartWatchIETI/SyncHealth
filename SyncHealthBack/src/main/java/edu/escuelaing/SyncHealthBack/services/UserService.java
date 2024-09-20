@@ -1,7 +1,7 @@
-package edu.escuelaing.synchealthback.services;
+package edu.escuelaing.SyncHealthBack.services;
 
-import edu.escuelaing.synchealthback.models.User;
-import edu.escuelaing.synchealthback.repositorys.UserRepository;
+import edu.escuelaing.SyncHealthBack.models.User;
+import edu.escuelaing.SyncHealthBack.repositorys.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Optional;

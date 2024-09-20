@@ -1,12 +1,12 @@
-package edu.escuelaing.synchealthback.controllers;
+package edu.escuelaing.SyncHealthBack.controllers;
 
 
-import edu.escuelaing.synchealthback.models.User;
+import edu.escuelaing.SyncHealthBack.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import edu.escuelaing.synchealthback.services.UserService;
+import edu.escuelaing.SyncHealthBack.services.UserService;
 
 import java.util.Optional;
 

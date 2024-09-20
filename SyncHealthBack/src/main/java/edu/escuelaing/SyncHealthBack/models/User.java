@@ -1,7 +1,6 @@
-package edu.escuelaing.synchealthback.models;
+package edu.escuelaing.SyncHealthBack.models;
 
-import edu.escuelaing.synchealthback.enums.Role;
-import lombok.AllArgsConstructor;
+import edu.escuelaing.SyncHealthBack.enums.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;

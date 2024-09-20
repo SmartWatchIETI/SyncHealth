@@ -1,4 +1,4 @@
-package edu.escuelaing.synchealthback;
+package edu.escuelaing.SyncHealthBack;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

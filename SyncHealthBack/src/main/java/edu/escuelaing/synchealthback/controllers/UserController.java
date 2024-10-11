@@ -1,10 +1,11 @@
 package edu.escuelaing.synchealthback.controllers;
 
 
-import edu.escuelaing.synchealthback.models.User;
+import edu.escuelaing.synchealthback.models.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import edu.escuelaing.synchealthback.services.UserService;
 
@@ -19,10 +20,12 @@ import java.util.Optional;
 public class UserController {
 
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     /**
@@ -31,10 +34,14 @@ public class UserController {
      * @return  HttpStatus.CREATED if the user was created successfully
      */
     @PostMapping(value = "/create")
-    public ResponseEntity<HttpStatus> createUser(@RequestBody User user){
-        User newUser = new User(user.getFullName(), user.getEmail(), user.getHashPassword(), user.getBornDate(), user.getId());
-        userService.saveUser(newUser);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<HttpStatus> createUser(@RequestBody UserEntity user){
+        if(!userService.findByEmail(user.getEmail())) {
+            UserEntity newUser = new UserEntity(user.getFullName(), user.getEmail(), passwordEncoder.encode(user.getHashPassword()), user.getBornDate());
+            userService.saveUser(newUser);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }else{
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
     }
 
     /**
@@ -43,10 +50,10 @@ public class UserController {
      * @return  HttpStatus.OK if the user was updated successfully
      */
     @PutMapping(value = "/update")
-    public ResponseEntity<HttpStatus> updateUser(@RequestBody User user){
-        Optional<User> optionalUser = userService.findById(user.getId());
+    public ResponseEntity<HttpStatus> updateUser(@RequestBody UserEntity user){
+        Optional<UserEntity> optionalUser = userService.findById(user.getId());
         if(optionalUser.isPresent()){
-            User userToUpdate = optionalUser.get();
+            UserEntity userToUpdate = optionalUser.get();
             userToUpdate.setCity(user.getCity());
             userToUpdate.setPhone(user.getPhone());
             userToUpdate.setBloodGroup(user.getBloodGroup());
@@ -64,10 +71,10 @@ public class UserController {
      * @return user  the user with the given id
      */
     @GetMapping(value = "/get/{id}")
-    public ResponseEntity<User> getUser(@PathVariable String id){
-        Optional<User> optionalUser = userService.findById(id);
+    public ResponseEntity<UserEntity> getUser(@PathVariable String id){
+        Optional<UserEntity> optionalUser = userService.findById(id);
         if(optionalUser.isPresent()){
-            User userToUpdate = optionalUser.get();
+            UserEntity userToUpdate = optionalUser.get();
             return new ResponseEntity<>(userToUpdate, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -80,7 +87,7 @@ public class UserController {
      */
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable String id){
-        Optional<User> optionalUser = userService.findById(id);
+        Optional<UserEntity> optionalUser = userService.findById(id);
         if(optionalUser.isPresent()){
             userService.deleteUser(id);
             return new ResponseEntity<>(HttpStatus.OK);

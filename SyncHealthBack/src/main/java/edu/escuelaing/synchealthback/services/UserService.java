@@ -1,7 +1,7 @@
 package edu.escuelaing.synchealthback.services;
 
-import edu.escuelaing.synchealthback.models.User;
-import edu.escuelaing.synchealthback.repositorys.UserRepository;
+import edu.escuelaing.synchealthback.models.UserEntity;
+import edu.escuelaing.synchealthback.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Optional;
@@ -24,7 +24,7 @@ public class UserService {
      * Saves a user
      * @param user  the user to save
      */
-    public void saveUser(User user) {
+    public void saveUser(UserEntity user) {
         userRepository.save(user);
     }
 
@@ -33,7 +33,7 @@ public class UserService {
      * @param id  the id of the user
      * @return  the user with the given id
      */
-    public Optional<User> findById(String id) {
+    public Optional<UserEntity> findById(String id) {
         return userRepository.findById(id);
     }
 
@@ -43,5 +43,14 @@ public class UserService {
      */
     public void deleteUser(String id) {
         userRepository.deleteById(id);
+    }
+
+    /**
+     * Finds a user by its email
+     * @param email  the email of the user
+     * @return  the user with the given email
+     */
+    public boolean findByEmail(String email) {
+        return userRepository.findByEmail(email).isPresent();
     }
 }

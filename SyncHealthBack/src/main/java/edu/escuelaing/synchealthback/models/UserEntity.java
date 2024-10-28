@@ -48,13 +48,19 @@ public class UserEntity {
     @Max(3)
     private String height;
 
-
+    /**
+     * Constructor of the user class.
+     * @param fullName: full name of the user.
+     * @param email: email of the user.
+     * @param hashPassword: password of the user.
+     * @param bornDate: born date of the user.
+     */
     public UserEntity(String fullName, String email, String hashPassword, String bornDate) {
         this.fullName = fullName;
         this.email = email;
         this.hashPassword = hashPassword;
         this.bornDate = bornDate;
         this.role = RoleEntity.PATIENT;
-        this.id = role.name() + UUID.randomUUID().toString();
+        this.id = role.name() +"-"+ UUID.randomUUID().toString();
     }
 }

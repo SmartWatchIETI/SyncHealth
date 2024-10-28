@@ -50,7 +50,16 @@ public class UserService {
      * @param email  the email of the user
      * @return  the user with the given email
      */
-    public boolean findByEmail(String email) {
+    public Optional<UserEntity> findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    /**
+     * Checks if a user is present
+     * @param email  the email of the user
+     * @return  true if the user is present, false otherwise
+     */
+    public boolean isPresent(String email){
         return userRepository.findByEmail(email).isPresent();
     }
 }

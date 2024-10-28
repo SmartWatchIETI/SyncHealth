@@ -1,7 +1,6 @@
 package edu.escuelaing.synchealthback.security;
 
 import edu.escuelaing.synchealthback.models.UserEntity;
-import edu.escuelaing.synchealthback.security.JwtUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -13,8 +12,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import java.awt.*;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;

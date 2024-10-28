@@ -17,6 +17,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 public class SecurityConfig {
+    private static final String[] WHITE_LIST_URL = {"/api/v1/auth/**", "/v2/api-docs", "/v3/api-docs",
+            "/v3/api-docs/**", "/swagger-resources", "/swagger-resources/**", "/configuration/ui",
+            "/configuration/security", "/swagger-ui/**", "/webjars/**", "/swagger-ui.html", "/api/auth/**",
+            "/api/test/**", "/authenticate" ,"/api/users/create"};
+
     @Autowired
     UserDetailsService userDetailsService;
     @Autowired
@@ -26,21 +31,21 @@ public class SecurityConfig {
 
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http,AuthenticationManager authenticationManager) throws Exception {
+    SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
         JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(jwtUtils);
         jwtAuthenticationFilter.setAuthenticationManager(authenticationManager);
+
         return http
-                .csrf(config -> config.disable())
-                .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/api/users/create").permitAll();
-                    auth.anyRequest().authenticated();
-                })
-                .sessionManagement(session ->{
-                    session.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-                })
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth ->
+                        auth.requestMatchers(WHITE_LIST_URL).permitAll()
+                                .anyRequest().authenticated())
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Stateless para JWT
                 .addFilter(jwtAuthenticationFilter)
-                .addFilterBefore(jwtAuthorizationFilter,UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class) // Coloca el filtro de autorización antes
                 .build();
+
     }
     @Bean
     UserDetailsService userDetailsService() {
@@ -61,17 +66,4 @@ public class SecurityConfig {
                 .passwordEncoder(passwordEncoder)
                 .and().build();
     }
-
-    //  Create a User in memory
-//    @Bean
-//    UserDetailsService userDetailsService() {
-//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-//        manager.createUser(User.withUsername("Sebastian").password("password").roles().build());
-//        return manager;
-//    }
-//    Diseable PasswordEncoder
-//    @Bean
-//    PasswordEncoder passwordEncoder(){
-//        return NoOpPasswordEncoder.getInstance();
-//    }
 }

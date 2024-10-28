@@ -22,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UserEntity> userByEmail = userRepository.findByEmail(username);
+        Optional<UserEntity> userByEmail = userRepository.findByFullName(username);
         UserEntity user = userByEmail.orElseThrow(() -> new UsernameNotFoundException("User not found"));
         RoleEntity role = user.getRole();
         GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role.name());

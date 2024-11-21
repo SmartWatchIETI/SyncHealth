@@ -8,7 +8,6 @@ import java.util.Optional;
 
 /**
  * Service that manages the users
- * @author  Andres Arias
  */
 @Service
 public class UserService {

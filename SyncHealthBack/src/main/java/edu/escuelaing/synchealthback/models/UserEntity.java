@@ -13,7 +13,6 @@ import java.util.UUID;
 
 /**
  * Model that represents a user
- * @author  Andres Arias
  */
 @Data
 @Document(collection = "users")

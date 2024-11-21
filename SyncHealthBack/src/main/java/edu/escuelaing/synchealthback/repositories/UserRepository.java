@@ -8,7 +8,6 @@ import java.util.Optional;
 
 /**
  * Repository that manages the users
- * @author  Andres Arias
  */
 @Repository
 public interface UserRepository extends MongoRepository<UserEntity, String> {

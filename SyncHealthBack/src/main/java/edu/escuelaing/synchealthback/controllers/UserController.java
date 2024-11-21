@@ -18,7 +18,6 @@ import java.util.Optional;
 @RequestMapping("/api/users")
 /**
  * controller that manages the users
- * @author  Andres Arias
  */
 public class UserController {
 

@@ -1,70 +1,206 @@
-# Getting Started with Create React App
+# SyncHealth Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**SyncHealth** is a web application designed to track and manage user health metrics. The system is divided into two parts:
+1. A **Spring Boot** back-end for handling APIs, user authentication, and database operations.
+2. A **React** front-end for providing a user-friendly interface styled with **Bootstrap**.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+### Back-End (Spring Boot)
+- User Management:
+  - Create, update, delete, and fetch users.
+- Authentication:
+  - JWT-based secure login system.
+- MongoDB Integration:
+  - Data persistence for users and metrics.
+- API Documentation:
+  - Swagger UI enabled for easy API exploration.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Front-End (React)
+- Health Dashboard:
+  - Displays health metrics like blood sugar, heart rate, and BMI.
+- User Management:
+  - Create and list users through dynamic forms.
+- Login System:
+  - Secure login interface to authenticate users.
+- Responsive Design:
+  - Styled using **Bootstrap** for better user experience across devices.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## Technologies Used
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Back-End
+- **Spring Boot**: Core back-end framework.
+- **Spring Security**: Secures API endpoints with JWT.
+- **MongoDB**: NoSQL database for user and health data storage.
+- **Swagger**: API documentation and testing.
+- **Maven**: Dependency management.
 
-### `npm run build`
+### Front-End
+- **React**: Front-end library for building user interfaces.
+- **React Router**: For route-based navigation.
+- **Axios**: For HTTP requests to the back-end.
+- **Bootstrap**: For responsive and modern UI design.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Prerequisites
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Back-End
+- **Java 17** or higher.
+- **Maven 3.8+**.
+- **MongoDB Atlas** or a local MongoDB instance.
+- **IDE** (e.g., IntelliJ IDEA, Eclipse).
 
-### `npm run eject`
+### Front-End
+- **Node.js** (v16 or higher) and npm.
+- **Modern browser** (Chrome, Firefox, etc.).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Installation and Execution
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 1. Clone the Repository
+```bash
+git clone https://github.com/SmartWatchIETI/SyncHealth.git
+cd synchealth
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+### 2. Back-End Setup
+1. Navigate to the back-end directory:
+   ```bash
+   cd synchealth-backend
+   ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2. Configure your `application.properties` file located in:
+   ```
+   src/main/resources/application.properties
+   ```
+   Example configuration:
+   ```properties
+   spring.application.name=SyncHealthBack
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   # MongoDB Configuration
+   spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+   spring.data.mongodb.uri=mongodb+srv://<username>:<password>@<cluster-url>/<database-name>
+   spring.data.mongodb.database=SyncHealt
 
-### Code Splitting
+   # JWT Configuration
+   jwt.secret=<your-secret-key>
+   jwt.expiration=86400000
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+   # Swagger Configuration
+   springdoc.api-docs.enabled=true
+   springdoc.swagger-ui.enabled=true
+   springdoc.swagger-ui.path=/swagger-ui.html
+   ```
 
-### Analyzing the Bundle Size
+3. Run the application using Maven:
+   ```bash
+   mvn spring-boot:run
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+4. The back-end will be available at:
+   ```
+   http://localhost:8080
+   ```
 
-### Making a Progressive Web App
+5. Explore API documentation at:
+   ```
+   http://localhost:8080/swagger-ui.html
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+### 3. Front-End Setup
+1. Navigate to the front-end directory:
+   ```bash
+   cd synchealth-frontend
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-### Deployment
+3. Start the React development server:
+   ```bash
+   npm start
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+4. The front-end will be available at:
+   ```
+   http://localhost:3000
+   ```
 
-### `npm run build` fails to minify
+## Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. **Access the application**:
+   - Open the front-end in your browser: `http://localhost:3000`.
+
+2. **Login**:
+   - Use the `/login` route to authenticate a user.
+
+3. **Create and Manage Users**:
+   - Use `/create-user` to add new users.
+   - Use `/list-users` to view all users.
+
+4. **Health Dashboard**:
+   - Access the main dashboard via `/` to view health metrics.
+
+---
+
+## Deployment
+
+### Back-End
+1. Package the Spring Boot application:
+   ```bash
+   mvn clean package
+   ```
+2. Deploy the `.jar` file to your desired hosting service (e.g., AWS, Heroku, etc.).
+
+### Front-End
+1. Build the React application:
+   ```bash
+   npm run build
+   ```
+2. Deploy the `build` folder to a hosting service (e.g., Vercel, Netlify, or S3 bucket).
+
+---
+
+## Troubleshooting
+
+1. **CORS Issues**:
+   If the front-end cannot connect to the back-end, ensure that CORS is properly configured in `WebConfig.java`:
+   ```java
+   @Configuration
+   public class WebConfig implements WebMvcConfigurer {
+       @Override
+       public void addCorsMappings(CorsRegistry registry) {
+           registry.addMapping("/**").allowedOrigins("http://localhost:3000");
+       }
+   }
+   ```
+
+2. **MongoDB Connection**:
+   Verify that your MongoDB cluster is active and your credentials are correct.
+
+3. **JWT Configuration**:
+   Ensure that the `jwt.secret` in `application.properties` matches the secret used in your front-end requests.
+
+---
+
+## Contributing
+
+Contributions are welcome! Feel free to submit a pull request or open an issue if you encounter any problems.
+
+---
+
+## License
+
+This project is licensed under the MIT License.
